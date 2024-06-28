@@ -1,11 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class googleServices{
-  Future<UserCredential> signInWithGoogle()async{
+  BuildContext context;
+googleServices({required this.context});
+signInWithGoogle()async{
       // final googleSignin=GoogleSignIn();
       // GoogleSignIn ? User;
       // GoogleSignInAccount  user = User as GoogleSignInAccount;
+
+    showDialog(context: context, builder: (context){
+      return const Center(child: CircularProgressIndicator());
+    });
 
       //begin interactive sign in process
     final GoogleSignInAccount? gUser= await GoogleSignIn().signIn();
@@ -19,8 +26,9 @@ class googleServices{
       accessToken:gAuth.accessToken,
       idToken: gAuth.idToken
     );
-
+    Navigator.pop(context);
       //finally, let's the user sign in
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+     await FirebaseAuth.instance.signInWithCredential(credential);
+
+}
 }

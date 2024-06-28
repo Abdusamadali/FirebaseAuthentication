@@ -1,3 +1,6 @@
+
+
+import 'package:firebase/pages/aboutUser.dart';
 import 'package:firebase/pages/google_servies.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   final _pass = TextEditingController();
 
   //
-  bool see = false;
+  bool see = true;
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                         icon: const Icon(Icons.remove_red_eye_rounded),
+                        color: (see)?Colors.black54:Colors.pinkAccent,
                       ),
                       hintText: "Password",
                       fillColor: Colors.white,
@@ -104,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                       auth();
+                      auth();
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => userdata(user: _email.text),));
                     });
 
                   },
@@ -139,9 +144,9 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    sqrTile(url: 'assets/img_3.png',tap: googleServices().signInWithGoogle,),
+                    sqrTile(url: 'assets/img_3.png',tap: googleServices(context: context).signInWithGoogle,),
                     SizedBox(width: 50,),
-                    sqrTile(url: 'assets/img_4.png',tap: googleServices().signInWithGoogle,)
+                    sqrTile(url: 'assets/img_4.png',tap: googleServices(context: context).signInWithGoogle,)
                   ],
                 ),
                 const SizedBox(height: 80),

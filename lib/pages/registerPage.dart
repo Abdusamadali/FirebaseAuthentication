@@ -145,8 +145,6 @@ class _RegisterState extends State<RegisterPage> {
                       setState(() {
                         signup();
                       });
-
-
                     },
                     style: ButtonStyle(
                       backgroundColor:
@@ -180,9 +178,9 @@ class _RegisterState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    sqrTile(url: 'assets/img_3.png',tap :googleServices().signInWithGoogle),
+                    sqrTile(url: 'assets/img_3.png',tap :googleServices(context: context).signInWithGoogle),
                     SizedBox(width: 50,),
-                    sqrTile(url: 'assets/img_4.png',tap: googleServices().signInWithGoogle,)
+                    sqrTile(url: 'assets/img_4.png',tap: googleServices(context: context).signInWithGoogle,)
                   ],
                 ),
                 const SizedBox(height: 80),

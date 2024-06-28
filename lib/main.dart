@@ -26,7 +26,7 @@ class _myappState extends State<myapp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: AuthPage(email: null,),
     );
   }
 }

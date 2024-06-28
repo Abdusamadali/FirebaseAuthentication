@@ -23,6 +23,5 @@ class _optionPageState extends State<optionPage> {
       user_Registered=!user_Registered;
 
     });
-
   }
 }
