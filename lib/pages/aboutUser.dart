@@ -1,5 +1,6 @@
 import 'package:firebase/All_packages.dart';
 import 'package:firebase/databaseFunction.dart';
+import 'package:firebase/pages/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,11 @@ class _userdataState extends State<userdata> {
   var  name=null;
   var  Gender=null;
   var  age=null;
+
+
+  //for toggling between register and login page
 bool user_Registered=true;
+
   void toggle(){
     print('toogle called ');
     print(user_Registered);
@@ -35,11 +40,9 @@ bool user_Registered=true;
         title: const Center(child: Text('About')),
         actions: [
           IconButton(onPressed: () {
-
             setState(() {
               FirebaseAuth.instance.signOut();
             });
-
             //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(tap: toggle),));
           }, icon: const Icon(Icons.arrow_back_sharp))
         ],
@@ -106,6 +109,17 @@ bool user_Registered=true;
                   () async {
                     var data = await Retrive(widget.user);
                 setState(() {
+
+                  if(data==null){
+
+                    //creating snackbar
+                    var snackbar=SnackBar(content: Center(child: Text('oh! please enter data first')));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+
+                    //going to home page
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(email: widget.user),));
+
+                  }
 
                   print(data?['name']);
                   print(data?['age']);

@@ -18,17 +18,27 @@ signInWithGoogle()async{
     final GoogleSignInAccount? gUser= await GoogleSignIn().signIn();
 
 
-      //obtain auth details from request
-    final GoogleSignInAuthentication gAuth=await gUser!.authentication;
+    //obtain auth details from request
+   final GoogleSignInAuthentication gAuth=await gUser!.authentication;
 
-      //create a new credentials for user
+
+    //create a new credentials for user
     final credential=GoogleAuthProvider.credential(
       accessToken:gAuth.accessToken,
       idToken: gAuth.idToken
     );
+
+
+    //print("---------------------------------------------$credential");
+
+  //  print("----------------------------------====$GoogleSignInAccount");
     Navigator.pop(context);
       //finally, let's the user sign in
-     await FirebaseAuth.instance.signInWithCredential(credential);
 
+
+    var h = await FirebaseAuth.instance.signInWithCredential(credential);
+    String? userEmail = h.user?.email;
+
+    print("---------------------------------------------${userEmail}");
 }
 }

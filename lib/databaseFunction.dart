@@ -3,6 +3,8 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/pages/HomePage.dart';
+import 'package:flutter/cupertino.dart';
 
 create (String _name,_gender,int _age,_user)async{
   await FirebaseFirestore.instance.collection('instagram').doc(_user).set({
@@ -24,12 +26,16 @@ Delete()async{
 
 }
 Future<Map<String, dynamic>?> Retrive(String? user) async{
-  var User="user";
-  (user != null)?User=user:User="user";
+  var User=user;
+ // (user != null)?User=user:User="user";
   var data=await FirebaseFirestore.instance.collection('instagram').doc(User).get();
   print('data retrived');
   // return data.data();
   //print((data.data())?["name"]);
   //print(data.data()?[dataType]);
-  return ((data.data()));
+  var Userdata=data.data();
+ // if(Userdata==null){
+ //   Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => Home(email: email),))
+ // }
+  return (Userdata);
 }
