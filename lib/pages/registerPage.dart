@@ -1,3 +1,4 @@
+import 'package:firebase/pages/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -220,8 +221,15 @@ class _RegisterState extends State<RegisterPage> {
           email: _email.text,
           password: _pass.text);
       print("-------------------${user}.");
+      showDialog(context: context, builder: (context) {
+         return AlertDialog(title: Text('accunt created'),
+        backgroundColor:Colors.pink,
+        );
+      },);
       Navigator.pop(context);
-      
+      FirebaseAuth.instance.signOut();
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home(email: _email.text)));
     }on FirebaseException catch(e){
     showError(e.code);
     }
